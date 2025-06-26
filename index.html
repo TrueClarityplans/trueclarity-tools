@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trucker's Paycheck Protection Plan | TrueClarity Plans</title>
+    <title>Trucker's Paycheck Protection Plan | Clarity Match</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +47,18 @@
             border-color: #1E3A8A;
             background-color: #eff6ff;
         }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1E3A8A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -54,79 +66,90 @@
     <div class="w-full max-w-lg mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="p-8 md:p-10">
 
-            <!-- Stage 1: Lead Capture -->
-            <div id="stage-1" class="stage active text-center">
-                <h1 class="text-3xl font-serif text-brand-blue">If Your Rig Stopped, Would Your Paychecks Stop Too?</h1>
-                <p class="mt-4 text-gray-600">You protect your truck. Let's protect your income. Get an instant estimate on a plan that replaces your paycheck for your family.</p>
-                <form id="lead-capture-form" class="mt-6 flex flex-col gap-4">
-                    <input type="email" id="user-email" placeholder="Enter Your Best Email" required class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue text-center">
-                    <button type="submit" class="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-all">
-                        Get My Free Estimate
-                    </button>
-                    <p class="text-xs text-gray-400 mt-2">Takes 60 seconds. No obligation.</p>
-                </form>
-            </div>
-
-            <!-- Stage 2: Calculator -->
-            <div id="stage-2" class="stage">
+            <!-- Stage 1: Calculator -->
+            <div id="stage-1" class="stage active">
                  <h2 class="text-2xl font-serif text-center text-gray-800">Paycheck Protection Estimator</h2>
-                 <div class="mt-6 space-y-4">
+                 <p class="text-center text-gray-500 mt-2">Let's figure out a simple plan to protect your family.</p>
+                 <div class="mt-8 space-y-6">
                      <div>
-                        <label for="weekly-pay" class="block text-sm font-medium text-gray-700">Average Weekly Take-Home Pay</label>
-                        <input type="number" id="weekly-pay" placeholder="$1,500" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm">
+                        <label for="weekly-pay" class="block text-sm font-medium text-gray-700">1. What's your average weekly take-home pay?</label>
+                        <p class="text-xs text-gray-500">This helps us know how much income your family counts on.</p>
+                        <input type="number" id="weekly-pay" placeholder="$1,500" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
                     </div>
                     <div>
-                        <label for="protection-years" class="block text-sm font-medium text-gray-700">How many years of paychecks to protect?</label>
-                        <select id="protection-years" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm">
+                        <label for="protection-years" class="block text-sm font-medium text-gray-700">2. How many years of paychecks do you want to protect?</label>
+                        <p class="text-xs text-gray-500">This is usually until your kids are grown or the house is paid off.</p>
+                        <select id="protection-years" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
                             <option value="10">10 Years</option>
                             <option value="15">15 Years</option>
                             <option value="20" selected>20 Years</option>
                             <option value="25">25 Years</option>
                         </select>
                     </div>
-                     <div class="grid grid-cols-2 gap-4">
-                         <div>
-                            <label for="age" class="block text-sm font-medium text-gray-700">Your Age</label>
-                            <input type="number" id="age" placeholder="e.g., 40" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm">
-                        </div>
-                        <div>
-                             <label class="block text-sm font-medium text-gray-700">Tobacco User?</label>
-                             <div id="tobacco-choices" class="grid grid-cols-2 gap-2 mt-1">
-                                <button class="choice-button p-2 rounded-lg" data-value="no">No</button>
-                                <button class="choice-button p-2 rounded-lg" data-value="yes">Yes</button>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-700">3. A few quick details:</label>
+                        <p class="text-xs text-gray-500">This helps us get a more accurate estimate.</p>
+                         <div class="grid grid-cols-2 gap-4 mt-2">
+                             <div>
+                                <label for="age" class="block text-xs font-semibold text-gray-600">Your Age</label>
+                                <input type="number" id="age" placeholder="e.g., 40" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
                             </div>
-                             <input type="hidden" id="tobacco-status" value="">
+                            <div>
+                                 <label class="block text-xs font-semibold text-gray-600">Tobacco User?</label>
+                                 <div id="tobacco-choices" class="grid grid-cols-2 gap-2 mt-1">
+                                    <button class="choice-button p-2 rounded-lg text-sm" data-value="no">No</button>
+                                    <button class="choice-button p-2 rounded-lg text-sm" data-value="yes">Yes</button>
+                                </div>
+                                 <input type="hidden" id="tobacco-status" value="">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-8">
-                    <button id="calculate-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all disabled:opacity-50" disabled>
-                        See My Estimated Rate
+                    <button id="calculate-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3" disabled>
+                        <span id="btn-text">✨ See My Protection Plan</span>
+                        <div id="btn-loader" class="loader hidden"></div>
                     </button>
                 </div>
             </div>
             
-            <!-- Stage 3: Results -->
-            <div id="stage-3" class="stage text-center">
-                <h2 class="text-2xl font-serif text-gray-800">Your Estimated Protection Plan:</h2>
+            <!-- Stage 2: Results -->
+            <div id="stage-2" class="stage text-center">
+                <h2 class="text-2xl font-serif text-gray-800">Your Protection Plan Estimate:</h2>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-                    <div class="bg-blue-50 p-4 rounded-lg border border-brand-blue">
-                        <p class="text-sm font-semibold text-brand-blue">Estimated Monthly Cost</p>
-                        <p id="rate-amount" class="text-3xl font-bold text-brand-blue mt-1"></p>
-                    </div>
+                <div class="mt-6 space-y-6">
                     <div class="bg-gray-50 p-4 rounded-lg">
-                        <p class="text-sm font-semibold text-gray-600">Total Income Protected</p>
-                        <p id="protected-income" class="text-3xl font-bold text-gray-800 mt-1"></p>
+                        <p class="text-sm font-semibold text-gray-600">The Value of Your Future Paychecks</p>
+                        <p id="protected-income" class="text-4xl font-bold text-gray-800 mt-1"></p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg border-2 border-brand-blue">
+                        <p class="text-sm font-semibold text-brand-blue tracking-wider uppercase">Your Monthly Cost to Protect It</p>
+                        <p id="rate-amount" class="text-5xl font-bold text-brand-blue mt-1"></p>
                     </div>
                 </div>
 
-                <div class="bg-gray-100 p-4 rounded-lg text-xs text-gray-600 mt-6">
-                     <p><strong>Disclaimer:</strong> This is an estimate for a healthy, non-tobacco user and is not a guaranteed quote. Your final rate depends on your health and lifestyle, as determined by the insurance carrier's underwriting process.</p>
+                <div class="bg-white p-6 rounded-lg mt-8 border">
+                    <h4 class="font-serif text-xl text-gray-800 mb-2">How It Works (In Simple Terms)</h4>
+                    <p class="text-gray-600 text-sm">Think of it like this: You pay a small, fixed amount each month (like a phone bill). If something happens to you, the insurance company gives your family a big, tax-free check for the total amount you protected. This lets them pay the mortgage, buy groceries, and live their lives without financial stress.</p>
                 </div>
-                <p class="mt-6 text-gray-700 font-medium">This is how affordable it can be to make sure your family is taken care of. A formal quote is free and takes minutes.</p>
-                <a href="https://calendly.com/trueclarity-consult/free-15-min-consultation" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-all">
+
+                <div class="bg-gray-100 p-4 rounded-lg text-sm text-left mt-6">
+                    <h4 class="font-semibold text-gray-800 mb-2">An Important Note from your Clarity Match Assistant:</h4>
+                    <p id="ai-explanation" class="text-gray-600"></p>
+                </div>
+
+                <p class="mt-8 text-gray-700 font-medium">This is how affordable peace of mind can be. An official quote is free and takes minutes.</p>
+                <a href="https://api.leadconnectorhq.com/widget/booking/YAB3BSr26zd42pFwp3A7" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform hover:scale-105">
                     Get a Formal Quote Now
+                </a>
+            </div>
+
+             <!-- Stage 3: Error -->
+            <div id="stage-3" class="stage text-center">
+                 <h2 class="text-2xl font-serif text-red-600">Something Went Wrong</h2>
+                 <p class="mt-4 text-gray-600">We couldn't generate your estimate at this time. Please try again or book a call directly for assistance.</p>
+                  <a href="https://api.leadconnectorhq.com/widget/booking/YAB3BSr26zd42pFwp3A7" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-all">
+                    Book a Free Call
                 </a>
             </div>
         </div>
@@ -134,7 +157,6 @@
 
     <script>
         const stages = document.querySelectorAll('.stage');
-        const leadCaptureForm = document.getElementById('lead-capture-form');
         const calculateBtn = document.getElementById('calculate-btn');
         const tobaccoChoiceContainer = document.getElementById('tobacco-choices');
         const tobaccoStatusInput = document.getElementById('tobacco-status');
@@ -154,15 +176,6 @@
         
         // --- Event Listeners ---
         
-        leadCaptureForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (document.getElementById('user-email').value) {
-                // In a real app, send lead to CRM here
-                console.log('Lead Captured:', document.getElementById('user-email').value);
-                switchStage(1); 
-            }
-        });
-
         tobaccoChoiceContainer.addEventListener('click', (e) => {
             const button = e.target.closest('.choice-button');
             if (!button) return;
@@ -175,35 +188,80 @@
         document.getElementById('weekly-pay').addEventListener('input', validateForm);
         document.getElementById('age').addEventListener('input', validateForm);
 
-        calculateBtn.addEventListener('click', () => {
+        calculateBtn.addEventListener('click', async () => {
+            document.getElementById('btn-text').classList.add('hidden');
+            document.getElementById('btn-loader').classList.remove('hidden');
+            calculateBtn.disabled = true;
+
             const weeklyPay = parseFloat(document.getElementById('weekly-pay').value) || 0;
             const years = parseInt(document.getElementById('protection-years').value);
             const age = parseInt(document.getElementById('age').value);
             const isTobaccoUser = tobaccoStatusInput.value === 'yes';
-
             const totalProtectedIncome = weeklyPay * 52 * years;
 
-            // --- Simplified Rate Estimation Logic ---
-            let baseRate = 8;
-            let ageFactor = Math.pow(1.09, age - 30);
-            if (age > 45) ageFactor *= 1.6;
-            
-            let coverageFactor = totalProtectedIncome / 250000;
-            let tobaccoFactor = isTobaccoUser ? 3.5 : 1.0;
-            
-            let estimatedMonthlyRate = baseRate * ageFactor * coverageFactor * tobaccoFactor;
+            const prompt = `
+                You are an AI assistant for Clarity Match, an insurance agency specializing in plans for truckers. Your tone must be professional, clear, and empathetic. Your reading level should be simple and direct.
+                
+                User Data:
+                - Age: ${age}
+                - Is Tobacco User: ${isTobaccoUser}
+                - Total Income to Protect: ${totalProtectedIncome} over ${years} years.
 
-            const currencyFormatter = new Intl.NumberFormat('en-US', { 
-                style: 'currency', 
-                currency: 'USD', 
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0 
-            });
+                Task:
+                1. Calculate a plausible, non-binding, estimated monthly premium for a term life insurance policy. Your internal logic should use a base rate multiplied by factors for age, coverage amount, and tobacco use. Acknowledge that older ages and tobacco use significantly increase the cost.
+                2. Write a short, simple, and empathetic explanation (1-2 sentences at a 5th-grade reading level) of why protecting this specific income amount is so important for a trucker and their family back home.
 
-            document.getElementById('rate-amount').textContent = `${currencyFormatter.format(estimatedMonthlyRate)}/mo`;
-            document.getElementById('protected-income').textContent = currencyFormatter.format(totalProtectedIncome);
-            
-            switchStage(2);
+                Output Format: You MUST provide your response in the specified JSON format. Do not add any text before or after the JSON object.
+            `;
+
+            try {
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "estimatedRate": { "type": "NUMBER" },
+                                "explanation": { "type": "STRING" },
+                            },
+                            required: ["estimatedRate", "explanation"]
+                        }
+                    }
+                };
+                
+                const apiKey = ""; // Leave blank, handled by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`API Error: ${response.status}`);
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
+                    const data = JSON.parse(result.candidates[0].content.parts[0].text);
+                    const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
+
+                    document.getElementById('rate-amount').textContent = `${currencyFormatter.format(data.estimatedRate)}/mo`;
+                    document.getElementById('protected-income').textContent = currencyFormatter.format(totalProtectedIncome);
+                    document.getElementById('ai-explanation').textContent = data.explanation;
+                    
+                    switchStage(1);
+                } else {
+                    throw new Error("Invalid response structure from API.");
+                }
+
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                switchStage(2); // Show error stage
+            } finally {
+                // This part is intentionally left blank to keep the button disabled after one use.
+            }
         });
 
     </script>
