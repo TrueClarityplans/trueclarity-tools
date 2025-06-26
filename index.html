@@ -57,12 +57,12 @@
 <body class="flex items-center justify-center min-h-screen p-4">
 
     <div class="w-full max-w-md mx-auto bg-white text-gray-800 rounded-2xl shadow-xl overflow-hidden">
-        <div class="p-8 md:p-10">
+        <div class="p-6 md:p-8">
 
             <div id="stage-calculator" class="stage active">
                 <h2 class="text-3xl font-condensed text-center text-gray-900">The Future Income Calculator</h2>
                 <p class="text-center text-gray-500 mt-2">See the total value of your future earnings in 30 seconds.</p>
-                <div class="mt-8 space-y-6">
+                <div class="mt-6 space-y-4">
                     <div>
                         <label for="weekly-pay" class="block text-sm font-medium text-gray-700">1. What's your average weekly take-home pay?</label>
                         <div class="relative mt-2">
@@ -77,32 +77,32 @@
                         <input type="number" id="current-age" placeholder="e.g., 40" required min="18" max="64" class="mt-2 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-blue focus:border-brand-blue text-gray-900 text-lg">
                     </div>
                 </div>
-                <div class="mt-8">
+                <div class="mt-6">
                     <button id="calculate-btn" class="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg cta-button disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3">
                         <span id="btn-text">Calculate My Future Income</span>
                         <div id="btn-loader" class="loader hidden"></div>
                     </button>
                 </div>
-                 <p class="text-xs text-gray-500 text-center mt-4">We'll assume a standard retirement age of 65.</p>
+                 <p class="text-xs text-gray-500 text-center mt-3">We'll assume a standard retirement age of 65.</p>
             </div>
             
             <div id="stage-results" class="stage text-center">
                 <h2 class="text-xl font-semibold text-gray-700">Your Future Income is Worth:</h2>
-                <p id="future-income-amount" class="text-5xl md:text-6xl font-condensed text-brand-blue my-4"></p>
+                <p id="future-income-amount" class="text-5xl md:text-6xl font-condensed text-brand-blue my-2"></p>
                 <p class="text-gray-600 max-w-xs mx-auto">This is the amount of money your family depends on you to earn between now and retirement.</p>
                 
-                <div class="mt-8 bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                <div class="mt-6 bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
                      <h3 class="text-lg font-semibold text-gray-900">What Does Protection Cost?</h3>
                      <p id="quote-description" class="text-gray-600 mt-2 text-sm"></p>
                      <p id="quote-range" class="text-3xl font-bold text-brand-blue mt-3"></p>
                      <p class="text-xs text-gray-500 mt-2">(This is just an example. Your actual price depends on age, health, and the type of plan you choose.)</p>
                 </div>
 
-                <p class="mt-8 text-gray-800 font-medium">Find out your exact price to protect your family's future. It's free and only takes a few minutes.</p>
-                <a href="https://calendly.com/trueclarity-consult/free-15-min-consultation" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg cta-button">
+                <p class="mt-6 text-gray-800 font-medium">Find out your exact price to protect your family's future. It's free and only takes a few minutes.</p>
+                <a href="https://calendly.com/trueclarity-consult/free-15-min-consultation" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg cta-button">
                     Get My Protection Plan
                 </a>
-                 <button id="start-over-btn" class="mt-4 w-full py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition">
+                 <button id="start-over-btn" class="mt-3 w-full py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition">
                     ‹ Recalculate
                 </button>
             </div>
@@ -226,5 +226,3 @@
     </script>
 </body>
 </html>
-
-
