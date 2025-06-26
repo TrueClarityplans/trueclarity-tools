@@ -3,53 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trucker's Paycheck Protection Plan | Clarity Match</title>
+    <title>The Future Income Calculator | TrueClarity Plans</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f3f4f6; /* Light gray background */
         }
-        .font-serif {
-            font-family: 'DM Serif Display', serif;
+        .font-condensed {
+            font-family: 'Roboto Condensed', sans-serif;
         }
-        .bg-brand-blue { background-color: #1E3A8A; }
-        .hover\:bg-brand-blue-dark:hover { background-color: #1e3a8aE6; }
-        .text-brand-blue { color: #1E3A8A; }
-        .text-brand-gold { color: #FBBF24; }
-        .border-brand-blue { border-color: #1E3A8A; }
+        /* --- TrueClarity Plans Branding --- */
+        .bg-brand-blue { background-color: #2563eb; }
+        .hover\:bg-brand-blue-dark:hover { background-color: #1d4ed8; }
+        .text-brand-blue { color: #2563eb; }
         .focus\:ring-brand-blue:focus {
-            --tw-ring-color: #1E3A8A;
+            --tw-ring-color: #2563eb;
         }
-        .stage {
-            display: none;
-        }
+        .stage { display: none; }
         .stage.active {
             display: block;
-            animation: fade-in 0.6s ease-in-out;
+            animation: fade-in 0.7s ease-in-out;
         }
         @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-         .choice-button {
-            transition: all 0.2s ease-in-out;
-            border: 2px solid #e5e7eb;
-        }
-        .choice-button:hover {
-            border-color: #FBBF24;
-            transform: translateY(-2px);
-        }
-        .choice-button.selected {
-            border-color: #1E3A8A;
-            background-color: #eff6ff;
-        }
         .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1E3A8A;
+            border: 4px solid #d1d5db;
+            border-top: 4px solid #2563eb;
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -59,211 +44,166 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .cta-button {
+            transition: all 0.3s ease-in-out;
+        }
+        .cta-button:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 7px 14px rgba(59, 130, 246, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
 
-    <div class="w-full max-w-lg mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="w-full max-w-md mx-auto bg-white text-gray-800 rounded-2xl shadow-xl overflow-hidden">
         <div class="p-8 md:p-10">
 
             <!-- Stage 1: Calculator -->
-            <div id="stage-1" class="stage active">
-                 <h2 class="text-2xl font-serif text-center text-gray-800">Paycheck Protection Estimator</h2>
-                 <p class="text-center text-gray-500 mt-2">Let's figure out a simple plan to protect your family.</p>
-                 <div class="mt-8 space-y-6">
-                     <div>
+            <div id="stage-calculator" class="stage active">
+                <h2 class="text-3xl font-condensed text-center text-gray-900">The Future Income Calculator</h2>
+                <p class="text-center text-gray-500 mt-2">See the total value of your future earnings in 30 seconds.</p>
+                <div class="mt-8 space-y-6">
+                    <div>
                         <label for="weekly-pay" class="block text-sm font-medium text-gray-700">1. What's your average weekly take-home pay?</label>
-                        <p class="text-xs text-gray-500">This helps us know how much income your family counts on.</p>
-                        <input type="number" id="weekly-pay" placeholder="$1,500" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
+                        <div class="relative mt-2">
+                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="text-gray-500 sm:text-sm">$</span>
+                            </div>
+                            <input type="number" id="weekly-pay" placeholder="1,500" required min="1" class="block w-full pl-7 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-blue focus:border-brand-blue text-gray-900 text-lg">
+                        </div>
                     </div>
                     <div>
-                        <label for="protection-years" class="block text-sm font-medium text-gray-700">2. How many years of paychecks do you want to protect?</label>
-                        <p class="text-xs text-gray-500">This is usually until your kids are grown or the house is paid off.</p>
-                        <select id="protection-years" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
-                            <option value="10">10 Years</option>
-                            <option value="15">15 Years</option>
-                            <option value="20" selected>20 Years</option>
-                            <option value="25">25 Years</option>
-                        </select>
-                    </div>
-                     <div>
-                        <label class="block text-sm font-medium text-gray-700">3. A few quick details:</label>
-                        <p class="text-xs text-gray-500">This helps us get a more accurate estimate.</p>
-                         <div class="grid grid-cols-2 gap-4 mt-2">
-                             <div>
-                                <label for="age" class="block text-xs font-semibold text-gray-600">Your Age</label>
-                                <input type="number" id="age" placeholder="e.g., 40" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-blue focus:border-brand-blue">
-                            </div>
-                            <div>
-                                 <label class="block text-xs font-semibold text-gray-600">Tobacco User?</label>
-                                 <div id="tobacco-choices" class="grid grid-cols-2 gap-2 mt-1">
-                                    <button class="choice-button p-2 rounded-lg text-sm" data-value="no">No</button>
-                                    <button class="choice-button p-2 rounded-lg text-sm" data-value="yes">Yes</button>
-                                </div>
-                                 <input type="hidden" id="tobacco-status" value="">
-                            </div>
-                        </div>
+                        <label for="current-age" class="block text-sm font-medium text-gray-700">2. What is your current age?</label>
+                        <input type="number" id="current-age" placeholder="e.g., 40" required min="18" max="64" class="mt-2 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-blue focus:border-brand-blue text-gray-900 text-lg">
                     </div>
                 </div>
                 <div class="mt-8">
-                    <button id="calculate-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3" disabled>
-                        <span id="btn-text">✨ See My Protection Plan</span>
+                    <button id="calculate-btn" class="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg cta-button disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3">
+                        <span id="btn-text">Calculate My Future Income</span>
                         <div id="btn-loader" class="loader hidden"></div>
                     </button>
                 </div>
+                 <p class="text-xs text-gray-500 text-center mt-4">We'll assume a standard retirement age of 65.</p>
             </div>
             
             <!-- Stage 2: Results -->
-            <div id="stage-2" class="stage text-center">
-                <h2 class="text-2xl font-serif text-gray-800">Your Protection Plan Estimate:</h2>
+            <div id="stage-results" class="stage text-center">
+                <h2 class="text-xl font-semibold text-gray-700">Your Future Income is Worth:</h2>
+                <p id="future-income-amount" class="text-5xl md:text-6xl font-condensed text-brand-blue my-4"></p>
+                <p class="text-gray-600 max-w-xs mx-auto">This is the amount of money your family depends on you to earn between now and retirement.</p>
                 
-                <div class="mt-6 space-y-6">
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <p class="text-sm font-semibold text-gray-600">The Value of Your Future Paychecks</p>
-                        <p id="protected-income" class="text-4xl font-bold text-gray-800 mt-1"></p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg border-2 border-brand-blue">
-                        <p class="text-sm font-semibold text-brand-blue tracking-wider uppercase">Your Monthly Cost to Protect It</p>
-                        <p id="rate-amount" class="text-5xl font-bold text-brand-blue mt-1"></p>
-                    </div>
+                <div class="mt-8 bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                     <h3 class="text-lg font-semibold text-gray-900">What Does Protection Cost?</h3>
+                     <p id="quote-description" class="text-gray-600 mt-2 text-sm"></p>
+                     <p id="quote-range" class="text-3xl font-bold text-brand-blue mt-3"></p>
+                     <p class="text-xs text-gray-500 mt-2">(This is just an example. Your actual price depends on age, health, and the type of plan you choose.)</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg mt-8 border">
-                    <h4 class="font-serif text-xl text-gray-800 mb-2">How It Works (In Simple Terms)</h4>
-                    <p class="text-gray-600 text-sm">Think of it like this: You pay a small, fixed amount each month (like a phone bill). If something happens to you, the insurance company gives your family a big, tax-free check for the total amount you protected. This lets them pay the mortgage, buy groceries, and live their lives without financial stress.</p>
-                </div>
-
-                <div class="bg-gray-100 p-4 rounded-lg text-sm text-left mt-6">
-                    <h4 class="font-semibold text-gray-800 mb-2">An Important Note from your Clarity Match Assistant:</h4>
-                    <p id="ai-explanation" class="text-gray-600"></p>
-                </div>
-
-                <p class="mt-8 text-gray-700 font-medium">This is how affordable peace of mind can be. An official quote is free and takes minutes.</p>
-                <a href="https://api.leadconnectorhq.com/widget/booking/YAB3BSr26zd42pFwp3A7" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform hover:scale-105">
-                    Get a Formal Quote Now
+                <p class="mt-8 text-gray-800 font-medium">Find out your exact price to protect your family's future. It's free and only takes a few minutes.</p>
+                <a href="https://calendly.com/trueclarity-consult/free-15-min-consultation" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg cta-button">
+                    Get My Protection Plan
                 </a>
-            </div>
-
-             <!-- Stage 3: Error -->
-            <div id="stage-3" class="stage text-center">
-                 <h2 class="text-2xl font-serif text-red-600">Something Went Wrong</h2>
-                 <p class="mt-4 text-gray-600">We couldn't generate your estimate at this time. Please try again or book a call directly for assistance.</p>
-                  <a href="https://api.leadconnectorhq.com/widget/booking/YAB3BSr26zd42pFwp3A7" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg text-lg transition-all">
-                    Book a Free Call
-                </a>
+                 <button id="start-over-btn" class="mt-4 w-full py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition">
+                    ‹ Recalculate
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        const stages = document.querySelectorAll('.stage');
-        const calculateBtn = document.getElementById('calculate-btn');
-        const tobaccoChoiceContainer = document.getElementById('tobacco-choices');
-        const tobaccoStatusInput = document.getElementById('tobacco-status');
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Element Cache ---
+        const elements = {
+            calculatorStage: document.getElementById('stage-calculator'),
+            resultsStage: document.getElementById('stage-results'),
+            weeklyPayInput: document.getElementById('weekly-pay'),
+            currentAgeInput: document.getElementById('current-age'),
+            calculateBtn: document.getElementById('calculate-btn'),
+            btnText: document.getElementById('btn-text'),
+            btnLoader: document.getElementById('btn-loader'),
+            futureIncomeOutput: document.getElementById('future-income-amount'),
+            quoteDescription: document.getElementById('quote-description'),
+            quoteRange: document.getElementById('quote-range'),
+            startOverBtn: document.getElementById('start-over-btn'),
+        };
 
-        function switchStage(stageIndex) {
-            stages.forEach((stage, index) => {
-                stage.classList.toggle('active', index === stageIndex);
-            });
-        }
+        // --- Functions ---
+        const validateForm = () => {
+            const isPayValid = elements.weeklyPayInput.value && parseFloat(elements.weeklyPayInput.value) > 0;
+            const isAgeValid = elements.currentAgeInput.value && parseInt(elements.currentAgeInput.value) >= 18 && parseInt(elements.currentAgeInput.value) < 65;
+            elements.calculateBtn.disabled = !(isPayValid && isAgeValid);
+        };
+
+        const showStage = (stage) => {
+            elements.calculatorStage.classList.remove('active');
+            elements.resultsStage.classList.remove('active');
+            stage.classList.add('active');
+        };
         
-        function validateForm(){
-            const weeklyPay = document.getElementById('weekly-pay').value;
-            const age = document.getElementById('age').value;
-            const tobacco = tobaccoStatusInput.value;
-            calculateBtn.disabled = !(weeklyPay && age && tobacco);
-        }
-        
-        // --- Event Listeners ---
-        
-        tobaccoChoiceContainer.addEventListener('click', (e) => {
-            const button = e.target.closest('.choice-button');
-            if (!button) return;
-            tobaccoChoiceContainer.querySelectorAll('.choice-button').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            tobaccoStatusInput.value = button.dataset.value;
-            validateForm();
-        });
+        const setLoading = (isLoading) => {
+            elements.btnText.classList.toggle('hidden', isLoading);
+            elements.btnLoader.classList.toggle('hidden', !isLoading);
+            elements.calculateBtn.disabled = isLoading;
+        };
 
-        document.getElementById('weekly-pay').addEventListener('input', validateForm);
-        document.getElementById('age').addEventListener('input', validateForm);
+        const calculateFutureIncome = () => {
+            setLoading(true);
 
-        calculateBtn.addEventListener('click', async () => {
-            document.getElementById('btn-text').classList.add('hidden');
-            document.getElementById('btn-loader').classList.remove('hidden');
-            calculateBtn.disabled = true;
+            setTimeout(() => {
+                const weeklyPay = parseFloat(elements.weeklyPayInput.value) || 0;
+                const currentAge = parseInt(elements.currentAgeInput.value) || 0;
+                const retirementAge = 65;
+                const yearsToRetirement = retirementAge - currentAge;
 
-            const weeklyPay = parseFloat(document.getElementById('weekly-pay').value) || 0;
-            const years = parseInt(document.getElementById('protection-years').value);
-            const age = parseInt(document.getElementById('age').value);
-            const isTobaccoUser = tobaccoStatusInput.value === 'yes';
-            const totalProtectedIncome = weeklyPay * 52 * years;
-
-            const prompt = `
-                You are an AI assistant for Clarity Match, an insurance agency specializing in plans for truckers. Your tone must be professional, clear, and empathetic. Your reading level should be simple and direct.
-                
-                User Data:
-                - Age: ${age}
-                - Is Tobacco User: ${isTobaccoUser}
-                - Total Income to Protect: ${totalProtectedIncome} over ${years} years.
-
-                Task:
-                1. Calculate a plausible, non-binding, estimated monthly premium for a term life insurance policy. Your internal logic should use a base rate multiplied by factors for age, coverage amount, and tobacco use. Acknowledge that older ages and tobacco use significantly increase the cost.
-                2. Write a short, simple, and empathetic explanation (1-2 sentences at a 5th-grade reading level) of why protecting this specific income amount is so important for a trucker and their family back home.
-
-                Output Format: You MUST provide your response in the specified JSON format. Do not add any text before or after the JSON object.
-            `;
-
-            try {
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: prompt }] }],
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "OBJECT",
-                            properties: {
-                                "estimatedRate": { "type": "NUMBER" },
-                                "explanation": { "type": "STRING" },
-                            },
-                            required: ["estimatedRate", "explanation"]
-                        }
-                    }
-                };
-                
-                const apiKey = ""; // Leave blank, handled by the environment
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) throw new Error(`API Error: ${response.status}`);
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
-                    const data = JSON.parse(result.candidates[0].content.parts[0].text);
-                    const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
-
-                    document.getElementById('rate-amount').textContent = `${currencyFormatter.format(data.estimatedRate)}/mo`;
-                    document.getElementById('protected-income').textContent = currencyFormatter.format(totalProtectedIncome);
-                    document.getElementById('ai-explanation').textContent = data.explanation;
-                    
-                    switchStage(1);
+                // 1. Calculate the total future income
+                if (yearsToRetirement <= 0) {
+                    elements.futureIncomeOutput.textContent = "$0";
                 } else {
-                    throw new Error("Invalid response structure from API.");
+                    const totalIncome = weeklyPay * 52 * yearsToRetirement;
+                    const formatter = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    });
+                    elements.futureIncomeOutput.textContent = formatter.format(totalIncome);
                 }
 
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                switchStage(2); // Show error stage
-            } finally {
-                // This part is intentionally left blank to keep the button disabled after one use.
-            }
-        });
+                // 2. Set the dynamic quote range based on age
+                if (currentAge < 40) {
+                    elements.quoteDescription.textContent = "For a healthy person your age, a plan to protect this income could range from:";
+                    elements.quoteRange.textContent = "$50 - $150 / month";
+                } else if (currentAge >= 40 && currentAge < 50) {
+                    elements.quoteDescription.textContent = "For a healthy person in their 40s, a plan to protect this income could range from:";
+                    elements.quoteRange.textContent = "$75 - $250 / month";
+                } else { // 50 and over
+                    elements.quoteDescription.textContent = "For a healthy person in their 50s, a plan to protect this income could range from:";
+                    elements.quoteRange.textContent = "$150 - $450 / month";
+                }
+                
+                setLoading(false);
+                showStage(elements.resultsStage);
+            }, 500);
+        };
 
+        const resetCalculator = () => {
+            elements.weeklyPayInput.value = '';
+            elements.currentAgeInput.value = '';
+            validateForm();
+            showStage(elements.calculatorStage);
+        };
+
+        // --- Event Listeners ---
+        elements.weeklyPayInput.addEventListener('input', validateForm);
+        elements.currentAgeInput.addEventListener('input', validateForm);
+        elements.calculateBtn.addEventListener('click', calculateFutureIncome);
+        elements.startOverBtn.addEventListener('click', resetCalculator);
+
+        // --- Initial State ---
+        validateForm();
+        showStage(elements.calculatorStage);
+    });
     </script>
 </body>
 </html>
+
